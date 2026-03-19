@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Sehat Mama Petronela</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#FBF6EE;--warm:#F5ECD8;--border:#E8D5B5;--accent:#C97B3A;--accent-soft:#F0D4A8;--green:#4A9B6F;--green-soft:#D6EFE1;--wa:#25D366;--blue:#2563EB;--text:#2D1F0E;--text-mid:#7A5C3A;--text-soft:#B09070;--white:#FFFFFF;--red:#C0392B;--red-soft:#FFEBEB;--shadow:0 2px 16px rgba(100,60,10,0.08)}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+.hero{background:var(--text);color:var(--cream);padding:2rem 1.25rem 2.5rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50px;right:-50px;width:160px;height:160px;border-radius:50%;background:rgba(201,123,58,0.15)}
+.hero::after{content:'';position:absolute;bottom:-30px;left:-30px;width:110px;height:110px;border-radius:50%;background:rgba(74,155,111,0.12)}
+.hero-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);border:1px solid rgba(201,123,58,0.4);border-radius:20px;padding:3px 12px;margin-bottom:10px}
+.hero h1{font-family:'Lora',serif;font-size:22px;font-weight:600;line-height:1.3;margin-bottom:4px;position:relative;z-index:1}
+.hero h1 span{color:var(--accent);font-style:italic}
+.hero p{font-size:12px;color:rgba(251,246,238,0.6);position:relative;z-index:1}
+.date-chip{display:inline-block;margin-top:10px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:600;color:rgba(251,246,238,0.8);position:relative;z-index:1}
+.sync-bar{background:var(--white);border-bottom:1px solid var(--border);padding:8px 14px;display:flex;align-items:center;gap:8px}
+.sync-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;transition:background .3s}
+.sync-dot.ok{background:var(--green)}.sync-dot.busy{background:var(--accent);animation:pulse 1s infinite}.sync-dot.err{background:var(--red)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.sync-text{font-size:11px;font-weight:700;color:var(--text-soft);flex:1}
+.sync-time{font-size:10px;font-weight:600;color:var(--text-soft)}
+.doc-banner{padding:10px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
+.doc-banner.normal{background:#FFF8E7}.doc-banner.urgent{background:#FFF0E8}.doc-banner.today{background:#EDFAF0}
+.doc-icon{font-size:18px;flex-shrink:0}
+.doc-title{font-size:12px;font-weight:800;color:#7A5000}
+.doc-banner.urgent .doc-title{color:#7A3200}.doc-banner.today .doc-title{color:#1A5C30}
+.doc-sub{font-size:11px;font-weight:600;color:#A07030;margin-top:1px}
+.doc-banner.urgent .doc-sub{color:#A05020}.doc-banner.today .doc-sub{color:#2E7D4A}
+.tabs{display:flex;background:var(--white);border-bottom:1.5px solid var(--border);position:sticky;top:0;z-index:100}
+.tab{flex:1;padding:12px 4px;font-size:11px;font-weight:700;text-align:center;color:var(--text-soft);cursor:pointer;border-bottom:2.5px solid transparent;transition:all 0.2s;user-select:none;-webkit-tap-highlight-color:transparent}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.page{display:none;padding:1rem;max-width:480px;margin:0 auto}
+.page.active{display:block}
+.ring-wrap{display:flex;flex-direction:column;align-items:center;padding:1.25rem 0 .75rem}
+.ring-cont{position:relative;width:100px;height:100px}
+.ring-svg{transform:rotate(-90deg)}
+.rbg{fill:none;stroke:var(--warm);stroke-width:9}
+.rfill{fill:none;stroke:var(--green);stroke-width:9;stroke-linecap:round;transition:stroke-dashoffset 0.5s ease}
+.rlabel{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.rpct{font-size:22px;font-weight:900;color:var(--text);line-height:1}
+.rsub{font-size:10px;font-weight:600;color:var(--text-soft)}
+.rmsg{font-size:12px;font-weight:700;color:var(--text-mid);margin-top:8px;text-align:center}
+.sec{background:var(--white);border-radius:14px;border:1px solid var(--border);overflow:hidden;margin-bottom:10px;box-shadow:var(--shadow)}
+.sh{display:flex;align-items:center;gap:9px;padding:10px 13px;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.sh .ico{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.sp .sh{background:#FFF8E7;color:#7A5000}.sp .ico{background:#FFE082}
+.ss .sh{background:#FFF0E8;color:#7A3200}.ss .ico{background:#FFAB76}
+.sr .sh{background:#EDFAF0;color:#1A5C30}.sr .ico{background:#A5D6A7}
+.sm .sh{background:#F0ECF8;color:#3D1A7A}.sm .ico{background:#CE93D8}
+.sh2 .sh{background:#E8F4FD;color:#0D3A6A}.sh2 .ico{background:#90CAF9}
+.ci{display:flex;align-items:center;gap:11px;padding:10px 13px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;transition:background .12s;border-bottom:.5px solid var(--warm)}
+.ci:last-child{border-bottom:none}.ci:active{background:var(--warm)}
+.cb{width:21px;height:21px;border-radius:6px;border:2px solid var(--border);background:var(--white);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.ci.done .cb{background:var(--green);border-color:var(--green)}
+.cb svg{display:none}.ci.done .cb svg{display:block}
+.ci .lbl{font-size:13.5px;font-weight:600;color:var(--text);line-height:1.4;flex:1}
+.ci.done .lbl{color:var(--text-soft);text-decoration:line-through;text-decoration-color:var(--border)}
+.btns{display:flex;flex-direction:column;gap:9px;margin-top:10px;position:sticky;bottom:0;background:var(--cream);padding:10px 0 14px}
+.sbtn{width:100%;padding:13px;background:var(--green);color:white;border:none;border-radius:13px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;cursor:pointer;transition:opacity .2s,transform .1s;-webkit-tap-highlight-color:transparent}
+.sbtn:active{opacity:.85;transform:scale(.98)}.sbtn.saved{background:var(--text-soft)}.sbtn:disabled{opacity:.5;cursor:not-allowed}
+.wbtn{width:100%;padding:12px;background:var(--wa);color:white;border:none;border-radius:13px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;-webkit-tap-highlight-color:transparent}
+.wbtn:active{opacity:.85}.wi{width:17px;height:17px;flex-shrink:0}
+.rem{background:var(--warm);border:1.5px dashed var(--border);border-radius:13px;padding:12px 14px;margin-top:10px}
+.rem h4{font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.rem ul{list-style:none;display:flex;flex-direction:column;gap:4px}
+.rem li{font-size:12px;font-weight:600;color:var(--text-mid);display:flex;gap:7px}
+.rem li::before{content:'•';color:var(--accent);flex-shrink:0}
+.ds{margin-bottom:16px}.dt{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--text-soft);margin-bottom:8px}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.sc{background:var(--white);border:1px solid var(--border);border-radius:13px;padding:12px 14px;box-shadow:var(--shadow)}
+.sl{font-size:10px;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.sv{font-size:24px;font-weight:900;color:var(--text);line-height:1}.su{font-size:11px;font-weight:600;color:var(--text-soft)}
+.sc.hl{background:var(--text)}.sc.hl .sl{color:rgba(251,246,238,.6)}.sc.hl .sv{color:var(--accent)}.sc.hl .su{color:rgba(251,246,238,.5)}
+.wc{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:13px;box-shadow:var(--shadow)}
+.bars{display:flex;align-items:flex-end;justify-content:space-between;height:68px;gap:5px;margin-bottom:6px}
+.bc{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
+.bw{width:100%;flex:1;display:flex;align-items:flex-end}
+.bar{width:100%;border-radius:4px 4px 0 0;background:var(--accent-soft);min-height:3px;transition:height .4s}
+.bar.today{background:var(--green)}.bar.full{background:var(--accent)}.bd{font-size:9px;font-weight:700;color:var(--text-soft)}
+.stk{background:linear-gradient(135deg,var(--accent) 0%,#A05A25 100%);border-radius:14px;padding:15px 17px;color:white;display:flex;align-items:center;gap:13px}
+.sn{font-size:38px;font-weight:900;line-height:1}.si h3{font-size:13px;font-weight:800;margin-bottom:2px}.si p{font-size:11px;opacity:.8;font-weight:600}
+.hl2{display:flex;flex-direction:column;gap:7px}
+.hi{background:var(--white);border:1px solid var(--border);border-radius:11px;padding:10px 13px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow)}
+.hd{font-size:12px;font-weight:700;color:var(--text)}.hs{font-size:10px;color:var(--text-soft);font-weight:600;margin-top:1px}
+.hb{font-size:11px;font-weight:800;padding:3px 9px;border-radius:20px;white-space:nowrap}
+.bg{background:var(--green-soft);color:var(--green)}.bo{background:var(--accent-soft);color:var(--accent)}.br2{background:var(--red-soft);color:var(--red)}
+.sched{background:var(--white);border:1px solid var(--border);border-radius:13px;overflow:hidden;box-shadow:var(--shadow)}
+.sr2{display:flex;align-items:center;justify-content:space-between;padding:9px 13px;border-bottom:.5px solid var(--warm)}
+.sr2:last-child{border-bottom:none}.sl2{font-size:12px;font-weight:700;color:var(--text)}
+.sb2{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px}
+.up{background:var(--accent-soft);color:var(--accent)}.sn2{background:var(--red-soft);color:var(--red)}.td{background:var(--green-soft);color:var(--green)}
+.upzone{background:var(--white);border:2px dashed var(--border);border-radius:14px;padding:24px 16px;text-align:center;cursor:pointer;position:relative;margin-bottom:12px;transition:border-color .2s}
+.upzone:hover{border-color:var(--accent)}
+.upzone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upi{font-size:28px;margin-bottom:6px}.upt{font-size:13px;font-weight:800;color:var(--text);margin-bottom:2px}.ups{font-size:11px;font-weight:600;color:var(--text-soft)}
+#prev-img{width:100%;border-radius:11px;border:1px solid var(--border);margin-bottom:11px;display:none}
+.abtn{width:100%;padding:12px;background:var(--blue);color:white;border:none;border-radius:12px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;display:none;margin-bottom:11px}
+.abtn:disabled{opacity:.5;cursor:not-allowed}
+.rbox{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:14px;box-shadow:var(--shadow);display:none}
+.rh{display:flex;align-items:center;gap:9px;margin-bottom:10px;padding-bottom:9px;border-bottom:1px solid var(--warm)}
+.ri{font-size:20px}.rt{font-size:13px;font-weight:800;color:var(--text)}.rd{font-size:10px;font-weight:600;color:var(--text-soft);margin-top:1px}
+.rc{font-size:13px;font-weight:600;color:var(--text-mid);line-height:1.75;white-space:pre-wrap}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.rc.typing::after{content:'▋';animation:blink .7s infinite;color:var(--accent)}
+.pitem{background:var(--white);border:1px solid var(--border);border-radius:11px;padding:10px 13px;cursor:pointer;box-shadow:var(--shadow);margin-bottom:7px}
+.pih{display:flex;align-items:center;justify-content:space-between}.pid{font-size:12px;font-weight:700;color:var(--text)}
+.pip{font-size:11px;color:var(--text-soft);font-weight:600;margin-top:3px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.empty{text-align:center;padding:28px 16px;color:var(--text-soft)}.empty .e{font-size:28px;margin-bottom:7px}.empty p{font-size:12px;font-weight:600;line-height:1.6}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--text);color:var(--cream);padding:9px 18px;border-radius:18px;font-size:12px;font-weight:700;opacity:0;transition:all .3s;white-space:nowrap;z-index:999;pointer-events:none;max-width:90%;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@keyframes dots{0%{content:'.'}33%{content:'..'}66%{content:'...'}}
+.dots::after{content:'...';animation:dots 1.2s infinite}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-badge">Program Sehat</div>
+  <h1>Halo, <span>Mama Petronela</span> 🌿</h1>
+  <p>Checklist harian · jantung &amp; kolesterol</p>
+  <div class="date-chip" id="dc">Memuat...</div>
+</div>
+<div class="sync-bar">
+  <div class="sync-dot busy" id="sdot"></div>
+  <span class="sync-text" id="stxt">Menghubungkan...</span>
+  <span class="sync-time" id="stime"></span>
+</div>
+<div id="docb"></div>
+<div class="tabs">
+  <div class="tab active" onclick="sw('cl')">✅ Checklist</div>
+  <div class="tab" onclick="sw('db')">📊 Progress</div>
+  <div class="tab" onclick="sw('bl')">🩸 Hasil Darah</div>
+</div>
+<div class="page active" id="page-cl">
+  <div class="ring-wrap">
+    <div class="ring-cont">
+      <svg class="ring-svg" width="100" height="100" viewBox="0 0 100 100">
+        <circle class="rbg" cx="50" cy="50" r="43"/>
+        <circle class="rfill" id="rf" cx="50" cy="50" r="43" stroke-dasharray="270.2" stroke-dashoffset="270.2"/>
+      </svg>
+      <div class="rlabel"><span class="rpct" id="rp">0%</span><span class="rsub" id="rs">0 / 15</span></div>
+    </div>
+    <div class="rmsg" id="rm">Ayo mulai hari ini, Mama! 💪</div>
+  </div>
+  <div class="sec sp"><div class="sh"><div class="ico">☀️</div>Pagi</div>
+    <div class="ci" data-id="p1" data-lbl="Minum air putih pagi" onclick="tog(this)"><div class="cb"><svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="lbl">Minum air putih setelah bangun</span></div>
+    <div class="ci" data-id="p2" data-lbl="Sarapan sehat" onclick="tog(this)"><div class="cb"><svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="lbl">Sarapan: nasi + telur / ikan / tempe</span></div>
+    <div class="ci" data-id="p3" data-lbl="Teh/kopi tanpa gula" onclick="tog(this)"><div class="cb"><svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="lbl">Teh / kopi tanpa gula</span></div>
+    <div class="ci" data-id="p4" data-lbl="Jalan pagi 20-30 menit" onclick="tog(this)"><div class="cb"><svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="lbl">Jalan pagi 20–30 menit</span></div>
+  </div>
+  <div class="sec ss"><div class="sh"><div class="ico">🌤</div>Siang</div>
+    <div class="ci" data-id="s1" data-lbl="Nasi secukupnya" onclick="tog(this)"><div class="cb"><svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="lbl">Nasi secukupnya (tidak berlebihan)</span></div>
+    <div class="ci" data-id="s2" data-lbl="Lauk ikan" onclick="tog(this)"><div class="cb"><svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="lbl">Lauk ikan (lebih sering dari daging)</span></div>
+    <div class="ci" data-id="s3" data-lbl="Ada sayur" onclick="tog(this)"><div class="cb"><svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="lbl">Ada sayur di piring</span></div>
+    <div class="ci" data-id="s4" data-lbl="Kurangi gorengan" onclick="tog(this)"><div class="cb"><svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="lbl">Kurangi gorengan hari ini</span></div>
+  </div>
+  <div class="sec sr"><div class="sh"><div class="ico">🌿</div>Sore</div>
+    <div class="ci" data-id="so1" data-lbl="Makan buah" onclick="tog(this)"><div class="cb"><svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="lbl">Makan buah (pisang, pepaya, dll)</span></div>
+    <div class="ci" data-id="so2" data-lbl="Aktivitas ringan sore" onclick="tog(this)"><div class="cb"><svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="lbl">Aktivitas ringan / jalan-jalan sore</span></div>
+  </div>
+  <div class="sec sm"><div class="sh"><div class="ico">🌙</div>Malam</div>
+    <div class="ci" data-id="m1" data-lbl="Makan ringan malam" onclick="tog(this)"><div class="cb"><svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="lbl">Makan lebih ringan dari siang</span></div>
+    <div class="ci" data-id="m2" data-lbl="Kurangi nasi malam" onclick="tog(this)"><div class="cb"><svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="lbl">Kurangi nasi malam</span></div>
+    <div class="ci" data-id="m3" data-lbl="Tidak makan manis malam" onclick="tog(this)"><div class="cb"><svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="lbl">Tidak makan manis malam hari</span></div>
+  </div>
+  <div class="sec sh2"><div class="sh"><div class="ico">💧</div>Sepanjang Hari</div>
+    <div class="ci" data-id="h1" data-lbl="Air putih 6-8 gelas" onclick="tog(this)"><div class="cb"><svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="lbl">Air putih 6–8 gelas</span></div>
+    <div class="ci" data-id="h2" data-lbl="Hindari minuman manis" onclick="tog(this)"><div class="cb"><svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="lbl">Hindari minuman manis / bersoda</span></div>
+    <div class="ci" data-id="h3" data-lbl="Kurangi gorengan" onclick="tog(this)"><div class="cb"><svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="lbl">Ingat kurangi gorengan hari ini</span></div>
+  </div>
+  <div class="rem"><h4>🌸 Ingat selalu, Mama</h4><ul>
+    <li>Jalan pagi setiap hari — tidak perlu jauh</li>
+    <li>Gula sedikit, bukan tidak sama sekali</li>
+    <li>Sehat itu proses — sedikit demi sedikit ya</li>
+  </ul></div>
+  <div class="btns">
+    <button class="sbtn" id="sav" onclick="saveProg()">Simpan Progress Hari Ini 💾</button>
+    <button class="wbtn" onclick="sendWA()">
+      <svg class="wi" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.553 4.112 1.523 5.843L0 24l6.337-1.5A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.794 9.794 0 01-4.988-1.365l-.358-.214-3.712.878.935-3.618-.235-.372A9.78 9.78 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+      Kirim Laporan ke Serafim
+    </button>
+  </div>
+</div>
+<div class="page" id="page-db">
+  <div style="height:.75rem"></div>
+  <div class="ds"><div class="dt">Hari ini</div>
+    <div class="sg">
+      <div class="sc hl"><div class="sl">Selesai</div><div class="sv" id="sd">0</div><div class="su">dari 15 tugas</div></div>
+      <div class="sc"><div class="sl">Progress</div><div class="sv" id="sp2">0<span style="font-size:13px">%</span></div><div class="su" id="ss2">Belum mulai</div></div>
+    </div>
+  </div>
+  <div class="ds"><div class="dt">Jadwal Dokter</div><div class="sched" id="schd"></div></div>
+  <div class="ds"><div class="dt">Streak</div>
+    <div class="stk"><div class="sn" id="stn">0</div><div class="si"><h3>Hari berturut-turut</h3><p id="stm">Mulai hari ini ya Mama!</p></div></div>
+  </div>
+  <div class="ds"><div class="dt">7 Hari Terakhir</div>
+    <div class="wc"><div class="bars" id="wb"></div>
+      <div style="display:flex;justify-content:space-between;padding:0 2px">
+        <span style="font-size:9px;color:var(--text-soft);font-weight:700">7 hari lalu</span>
+        <span style="font-size:9px;color:var(--green);font-weight:800">Hari ini</span>
+      </div>
+    </div>
+  </div>
+  <div class="ds"><div class="dt">Riwayat</div><div class="hl2" id="hl2"></div></div>
+  <div style="height:1.5rem"></div>
+</div>
+<div class="page" id="page-bl">
+  <div style="height:.75rem"></div>
+  <div class="ds"><div class="dt">Upload Hasil Darah</div>
+    <div class="upzone">
+      <input type="file" accept="image/*" onchange="handleFile(this)">
+      <div class="upi">🩸</div>
+      <div class="upt">Foto hasil tes darah dari dokter</div>
+      <div class="ups">Tap untuk pilih foto atau kamera</div>
+    </div>
+    <img id="prev-img" alt="Preview">
+    <button class="abtn" id="abtn" onclick="analyzeBlood()">🔬 Analisa Sekarang</button>
+    <div class="rbox" id="rbox">
+      <div class="rh"><div class="ri">🩺</div><div><div class="rt">Analisa Hasil Darah</div><div class="rd" id="rdate"></div></div></div>
+      <div class="rc" id="rcontent"></div>
+    </div>
+  </div>
+  <div class="ds"><div class="dt">Riwayat Hasil Darah</div><div id="past-list"></div></div>
+  <div style="height:1.5rem"></div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const TOTAL=15,WA='6281295921813';
+const SURL='https://lmxlcczmuxpngjpmiubh.supabase.co';
+const SKEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxteGxjY3ptdXhwbmdqcG1pdWJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5MTAxMTMsImV4cCI6MjA4OTQ4NjExM30.A-TyUAXyJN_QRhp_z82YNtH8y7NWydYKbqtWNM3L5LQ';
+const sb=supabase.createClient(SURL,SKEY);
+const M2=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+
+function tKey(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function fmtL(k){const[y,m,d]=k.split('-');const D=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];const dt=new Date(y,m-1,d);return D[dt.getDay()]+', '+d+' '+M2[m-1]+' '+y}
+function fmtS(k){const[,m,d]=k.split('-');return d+' '+M2[m-1]}
+function fmtTime(d){return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
+document.getElementById('dc').textContent=fmtL(tKey());
+
+function setSyncStatus(state,msg,time){
+  document.getElementById('sdot').className='sync-dot '+state;
+  document.getElementById('stxt').textContent=msg;
+  document.getElementById('stime').textContent=time||'';
+}
+
+// Cache
+let cache={cl:{},bl:[]};
+
+async function init(){
+  setSyncStatus('busy','Menghubungkan ke cloud...');
+  try{
+    // Load today checklist
+    const t=tKey();
+    const{data:clData}=await sb.from('health_logs').select('*').eq('date',t).maybeSingle();
+    if(clData){
+      cache.cl[t]={items:clData.items||[],pct:clData.pct,saved:clData.saved_at};
+      const chkSet=new Set(clData.items||[]);
+      document.querySelectorAll('.ci').forEach(el=>{if(chkSet.has(el.dataset.id)){el.classList.add('done');chk.add(el.dataset.id)}});
+    }
+    // Load blood results
+    const{data:blData}=await sb.from('blood_results').select('*').order('saved_at',{ascending:false}).limit(20);
+    if(blData)cache.bl=blData.map(r=>({date:r.date,result:r.result,ts:r.saved_at}));
+    setSyncStatus('ok','Tersinkron ☁️',fmtTime(new Date()));
+  }catch(e){
+    setSyncStatus('err','Gagal terhubung — mode offline');
+  }
+  updRing();rdDash();rdBlood();
+  initDoc();
+}
+
+function initDoc(){
+  const now=new Date(),day=now.getDate(),m=now.getMonth()+1,y=now.getFullYear();
+  const cands=[];
+  if(day<=5)cands.push(new Date(y,m-1,5));if(day<=25)cands.push(new Date(y,m-1,25));
+  cands.push(new Date(y,m,5));cands.push(new Date(y,m,25));
+  let nd=null,du=null;
+  for(const c of cands){const diff=Math.round((c-now)/(864e5));if(diff>=0){nd=c;du=diff;break}}
+  if(!nd)return;
+  const ds=nd.getDate()+' '+M2[nd.getMonth()]+' '+nd.getFullYear();
+  const b=document.getElementById('docb');
+  let cls='doc-banner',ico,title,sub;
+  if(du===0){cls+=' today';ico='🚨';title='Hari ini jadwal periksa dokter!';sub='Jangan lupa bawa hasil tes darah ya Mama'}
+  else if(du<=3){cls+=' urgent';ico='⏰';title=du+' hari lagi — jadwal periksa dokter';sub='Jadwal: '+ds}
+  else{cls+=' normal';ico='📅';title='Jadwal dokter berikutnya: '+ds;sub=du+' hari lagi · Tanggal 5 & 25 setiap bulan'}
+  b.className=cls;b.innerHTML=`<div class="doc-icon">${ico}</div><div><div class="doc-title">${title}</div><div class="doc-sub">${sub}</div></div>`;
+}
+
+let chk=new Set();
+function tog(el){const id=el.dataset.id;if(chk.has(id)){chk.delete(id);el.classList.remove('done')}else{chk.add(id);el.classList.add('done')}updRing()}
+function updRing(){
+  const n=chk.size,p=Math.round((n/TOTAL)*100),C=270.2;
+  document.getElementById('rf').style.strokeDashoffset=C-(p/100)*C;
+  document.getElementById('rp').textContent=p+'%';document.getElementById('rs').textContent=n+' / '+TOTAL;
+  const msgs=[[0,'Ayo mulai hari ini, Mama! 💪'],[20,'Sudah mulai, bagus! 🌱'],[40,'Setengah jalan, terus ya! 🌸'],[60,'Keren banget Mama! ✨'],[80,'Hampir sempurna! 🎉'],[100,'Sempurna! Mama luar biasa! 🌟']];
+  let msg=msgs[0][1];for(const[t,m]of msgs){if(p>=t)msg=m}
+  document.getElementById('rm').textContent=msg;
+  document.getElementById('sd').textContent=n;
+  document.getElementById('sp2').innerHTML=p+'<span style="font-size:13px">%</span>';
+  document.getElementById('ss2').textContent=p===0?'Belum mulai':p<50?'Sedang berjalan':p<100?'Bagus sekali!':'Sempurna! 🌟';
+}
+
+async function saveProg(){
+  const btn=document.getElementById('sav');btn.disabled=true;btn.textContent='Menyimpan...';
+  setSyncStatus('busy','Menyimpan ke cloud...');
+  const t=tKey(),items=Array.from(chk),pct=Math.round((chk.size/TOTAL)*100);
+  try{
+    await sb.from('health_logs').upsert({date:t,items,pct,saved_at:new Date().toISOString()},{onConflict:'date'});
+    cache.cl[t]={items,pct};
+    setSyncStatus('ok','Tersimpan ☁️',fmtTime(new Date()));
+    rdDash();btn.textContent='✅ Tersimpan!';btn.classList.add('saved');
+    toast('Tersimpan! Serafim bisa lihat sekarang 🌸');
+  }catch(e){
+    setSyncStatus('err','Gagal simpan — coba lagi');
+    btn.textContent='Coba Lagi';toast('Gagal simpan, cek koneksi ya Mama');
+  }
+  setTimeout(()=>{btn.textContent='Simpan Progress Hari Ini 💾';btn.classList.remove('saved');btn.disabled=false},2500);
+}
+
+function sendWA(){
+  const t=tKey(),entry=cache.cl[t];
+  const p=entry?entry.pct:Math.round((chk.size/TOTAL)*100),n=entry?entry.items.length:chk.size;
+  const dL=[],uL=[];
+  document.querySelectorAll('.ci').forEach(el=>{const l=el.dataset.lbl;if(el.classList.contains('done'))dL.push('✅ '+l);else uL.push('⬜ '+l)});
+  let streak=getStreak();
+  const e=p>=80?'🌟':p>=50?'👍':'💪';
+  let msg=`${e} *Laporan Kesehatan Harian*\nMama Petronela – ${fmtL(t)}\n\n📊 *Progress: ${p}% (${n}/${TOTAL} tugas)*\n🔥 Streak: ${streak} hari berturut-turut\n\n`;
+  if(dL.length)msg+=`*Sudah dilakukan:*\n${dL.join('\n')}\n`;
+  if(uL.length)msg+=`\n*Belum dilakukan:*\n${uL.join('\n')}`;
+  window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,'_blank');toast('Membuka WhatsApp ke Serafim 💬');
+}
+
+let b64=null;
+function handleFile(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{b64=e.target.result;const img=document.getElementById('prev-img');img.src=b64;img.style.display='block';document.getElementById('abtn').style.display='block';document.getElementById('rbox').style.display='none'};
+  r.readAsDataURL(f);
+}
+
+async function analyzeBlood(){
+  if(!b64){toast('Pilih foto dulu ya Mama');return}
+  const btn=document.getElementById('abtn');btn.disabled=true;btn.innerHTML='🔬 Sedang menganalisa<span class="dots"></span>';
+  const rbox=document.getElementById('rbox'),rc=document.getElementById('rcontent'),rd=document.getElementById('rdate');
+  rbox.style.display='block';rd.textContent=fmtL(tKey());rc.textContent='';rc.className='rc typing';
+  const b64d=b64.split(',')[1],mime=b64.split(';')[0].split(':')[1];
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',max_tokens:1000,
+      system:`Kamu adalah asisten kesehatan yang membantu menganalisa hasil tes darah untuk Mama Petronela, seorang ibu yang sedang menjaga kesehatan jantung dan kolesterol.\n\nTugas kamu:\n1. Identifikasi nilai-nilai penting (kolesterol, LDL, HDL, trigliserida, gula darah, hemoglobin, dll)\n2. Jelaskan dalam bahasa Indonesia yang sederhana\n3. Tandai: NORMAL ✅, PERLU PERHATIAN ⚠️, TINGGI/RENDAH 🚨\n4. Berikan 3-5 rekomendasi praktis\n5. Akhiri dengan: "Sampaikan ke dokter ya Mama untuk penanganan lebih lanjut 🏥"\n\nFormat:\n📋 RINGKASAN HASIL\n[nilai-nilai]\n\n💡 REKOMENDASI\n[rekomendasi]\n\n[penutup]\n\nGunakan bahasa yang hangat seperti bicara ke ibu sendiri.`,
+      messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:mime,data:b64d}},{type:'text',text:'Ini hasil tes darah Mama Petronela. Tolong analisa dan berikan penjelasan serta rekomendasi ya.'}]}]
+    })});
+    const data=await res.json();
+    const text=data.content?.find(b=>b.type==='text')?.text||'Tidak bisa membaca. Coba foto yang lebih jelas ya Mama.';
+    rc.className='rc';let i=0;
+    async function typeIt(){
+      if(i<text.length){rc.textContent+=text[i];i++;setTimeout(typeIt,11)}
+      else{
+        // Save to Supabase
+        try{
+          const t=tKey();
+          await sb.from('blood_results').insert({date:t,result:text,saved_at:new Date().toISOString()});
+          cache.bl.unshift({date:t,result:text});
+          if(cache.bl.length>20)cache.bl=cache.bl.slice(0,20);
+          rdBlood();
+        }catch(e){}
+        toast('Analisa selesai! Tunjukkan ke dokter ya 🏥');
+      }
+    }
+    typeIt();
+  }catch(e){rc.className='rc';rc.textContent='Maaf, tidak bisa analisa saat ini. Coba lagi ya Mama. 🙏';toast('Gagal analisa — cek koneksi')}
+  btn.disabled=false;btn.textContent='🔬 Analisa Lagi';
+}
+
+function rdBlood(){
+  const c=document.getElementById('past-list');
+  if(!cache.bl||!cache.bl.length){c.innerHTML='<div class="empty"><div class="e">🩸</div><p>Belum ada riwayat.<br>Upload foto dari dokter di atas ya!</p></div>';return}
+  c.innerHTML='';
+  cache.bl.forEach(item=>{const el=document.createElement('div');el.className='pitem';el.innerHTML=`<div class="pih"><span class="pid">🩸 ${fmtL(item.date)}</span><span style="font-size:11px;color:var(--text-soft)">▼</span></div><div class="pip">${item.result.slice(0,100).replace(/\n/g,' ')}...</div>`;el.onclick=()=>{document.getElementById('rdate').textContent=fmtL(item.date);document.getElementById('rcontent').textContent=item.result;document.getElementById('rbox').style.display='block';document.getElementById('rbox').scrollIntoView({behavior:'smooth'})};c.appendChild(el)});
+}
+
+function rdDash(){rdSched();rdStreak();rdBars();rdHist()}
+function rdSched(){
+  const now=new Date(),day=now.getDate(),m=now.getMonth()+1,y=now.getFullYear();
+  const cands=[];if(day<=5)cands.push(new Date(y,m-1,5));if(day<=25)cands.push(new Date(y,m-1,25));cands.push(new Date(y,m,5));cands.push(new Date(y,m,25));
+  const card=document.getElementById('schd');let html='';
+  cands.slice(0,3).forEach(c=>{const diff=Math.round((c-now)/(864e5));const ds=c.getDate()+' '+M2[c.getMonth()]+' '+c.getFullYear();const lbl=diff===0?'Hari ini!':diff+' hari lagi';const cls=diff===0?'td':diff<=3?'sn2':'up';html+=`<div class="sr2"><span class="sl2">📅 ${ds}</span><span class="sb2 ${cls}">${lbl}</span></div>`});
+  card.innerHTML=html;
+}
+function getStreak(){
+  let s=0;const entries=Object.entries(cache.cl).sort((a,b)=>b[0].localeCompare(a[0]));
+  for(let i=0;i<60;i++){const d=new Date();d.setDate(d.getDate()-i);const k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');if(cache.cl[k]?.pct>=50)s++;else if(i>0)break}
+  return s;
+}
+function rdStreak(){const s=getStreak();document.getElementById('stn').textContent=s;const ms=['Mulai hari ini ya Mama!','Hari pertama! Keren!','Dua hari berturut! 💪','Tiga hari! Luar biasa!','4 hari — jadi kebiasaan! 🌸','5 hari! Mama hebat! ✨','6 hari! Hampir seminggu! 🎉','Seminggu penuh! Luar biasa! 🌟'];document.getElementById('stm').textContent=s>=ms.length?s+' hari! Mama super! 🏆':ms[Math.min(s,ms.length-1)]}
+function rdBars(){
+  const bars=document.getElementById('wb');bars.innerHTML='';const today=tKey();const DN=['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
+  for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');const p=cache.cl[k]?.pct||0;const isT=k===today;const col=document.createElement('div');col.className='bc';col.innerHTML=`<span style="font-size:9px;font-weight:800;color:${isT?'var(--green)':p>0?'var(--text-mid)':'var(--text-soft)'}">${p>0?p+'%':''}</span><div class="bw"><div class="bar${isT?' today':''}${p===100?' full':''}" style="height:${Math.max(p,3)}%"></div></div><span class="bd" style="color:${isT?'var(--green)':'var(--text-soft)'};font-weight:${isT?800:700}">${i===0?'Ini':DN[d.getDay()]}</span>`;bars.appendChild(col)}
+}
+async function rdHist(){
+  // Load all from supabase for history
+  try{
+    const{data}=await sb.from('health_logs').select('*').order('date',{ascending:false}).limit(14);
+    if(data)data.forEach(r=>{if(!cache.cl[r.date])cache.cl[r.date]={items:r.items||[],pct:r.pct}});
+  }catch(e){}
+  const h=document.getElementById('hl2');
+  const entries=Object.entries(cache.cl).filter(([,v])=>v&&v.pct!==undefined).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,14);
+  if(!entries.length){h.innerHTML='<div class="empty"><div class="e">📋</div><p>Belum ada riwayat.<br>Simpan progress hari ini dulu!</p></div>';return}
+  h.innerHTML='';const today=tKey();
+  for(const[key,val]of entries){const p=val.pct||0,n=Math.round((p/100)*TOTAL);const bc=p>=80?'bg':p>=50?'bo':'br2';const bt=p>=80?'🌟 '+p+'%':p>=50?'👍 '+p+'%':'💪 '+p+'%';const el=document.createElement('div');el.className='hi';el.innerHTML=`<div><div class="hd">${key===today?'📅 Hari ini':fmtS(key)}</div><div class="hs">${n} dari ${TOTAL} tugas · ${fmtL(key).split(', ')[0]}</div></div><span class="hb ${bc}">${bt}</span>`;h.appendChild(el)}
+}
+function sw(tab){
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['cl','db','bl'][i]===tab));
+  ['cl','db','bl'].forEach(id=>{document.getElementById('page-'+id).classList.toggle('active',id===tab)});
+  if(tab==='db')rdDash();if(tab==='bl')rdBlood();
+}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
+init();
+</script>
+</body>
+</html>
