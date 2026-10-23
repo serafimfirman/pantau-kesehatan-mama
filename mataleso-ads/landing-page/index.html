@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mataleso Coffee Canggu</title>
+<meta name="description" content="Specialty coffee with Indonesian soul on Jalan Padang Linjong, Canggu. Open every day, 7am to 9pm.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+<!--
+  TRACKING SETUP
+  1. Replace G-XXXXXXXXXX with the GA4 measurement ID (GA4 Admin API or GA4 UI).
+  2. Replace AW-XXXXXXXXXX with the Google Ads conversion ID.
+  3. Replace each AW-XXXXXXXXXX/LABEL with the label of the matching conversion action.
+  Until the IDs are filled in, the page still works; events are simply not sent.
+-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+  gtag('config', 'AW-XXXXXXXXXX');
+</script>
+
+<style>
+  :root {
+    --bg: #f7f2ea;
+    --surface: #fffaf3;
+    --ink: #2a1f17;
+    --muted: #6f6157;
+    --line: #e4d9cb;
+    --sun: #d9822b;
+    --sun-ink: #fffaf3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1a1410;
+      --surface: #231b15;
+      --ink: #f2e9dd;
+      --muted: #b3a597;
+      --line: #3a2e25;
+      --sun: #e8954a;
+      --sun-ink: #1a1410;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1a1410;
+    --surface: #231b15;
+    --ink: #f2e9dd;
+    --muted: #b3a597;
+    --line: #3a2e25;
+    --sun: #e8954a;
+    --sun-ink: #1a1410;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 17px/1.65 Inter, system-ui, sans-serif;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
+  h1, h2, h3 { font-family: Fraunces, Georgia, serif; font-weight: 400; line-height: 1.2; margin: 0; }
+  a { color: inherit; }
+
+  header { padding: 72px 0 48px; }
+  .sun {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--sun); margin-bottom: 28px;
+  }
+  h1 { font-size: clamp(36px, 8vw, 54px); }
+  .tagline { color: var(--muted); margin: 12px 0 0; font-size: 18px; }
+  .status { margin: 28px 0 0; font-size: 15px; color: var(--muted); }
+  .status strong { color: var(--ink); font-weight: 500; }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 48px; padding: 0 22px; border-radius: 999px;
+    font-weight: 500; font-size: 16px; text-decoration: none;
+    border: 1px solid var(--line); background: var(--surface);
+  }
+  .btn.primary { background: var(--sun); color: var(--sun-ink); border-color: var(--sun); }
+
+  section { padding: 48px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 28px; margin-bottom: 20px; }
+  .lede { font-family: Fraunces, Georgia, serif; font-size: 22px; line-height: 1.45; margin: 0; }
+
+  .menu { list-style: none; padding: 0; margin: 0; display: grid; gap: 22px; }
+  .menu h3 { font-size: 20px; }
+  .menu p { margin: 4px 0 0; color: var(--muted); }
+
+  .visit { display: grid; gap: 6px; margin-bottom: 24px; }
+  .visit dt { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .visit dd { margin: 0 0 14px; }
+  .map {
+    width: 100%; aspect-ratio: 4 / 3; border: 1px solid var(--line);
+    border-radius: 14px; overflow: hidden; background: var(--surface);
+  }
+  .map iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+  footer { padding: 40px 0 120px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+
+  /* Sticky action bar on phones, where most ad clicks land */
+  .bar {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    display: none; gap: 8px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    background: var(--surface); border-top: 1px solid var(--line);
+  }
+  .bar .btn { flex: 1; padding: 0 10px; font-size: 15px; }
+  @media (max-width: 640px) {
+    .bar { display: flex; }
+    header { padding-top: 48px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="sun" aria-hidden="true"></div>
+  <h1>Mataleso Coffee</h1>
+  <p class="tagline">Specialty Coffee, Indonesian Soul.</p>
+  <p class="status" id="status">Jalan Padang Linjong, Canggu. <strong>Open every day, 7am to 9pm.</strong></p>
+  <div class="actions">
+    <a class="btn primary" data-track="click_directions" href="https://www.google.com/maps/dir/?api=1&destination=Mataleso+Coffee+Canggu" target="_blank" rel="noopener">Get directions</a>
+    <a class="btn" data-track="click_whatsapp" data-wa href="https://wa.me/62XXXXXXXXXXX" target="_blank" rel="noopener">WhatsApp</a>
+    <a class="btn" data-track="view_menu" href="#menu">See the menu</a>
+  </div>
+</header>
+
+<section class="wrap">
+  <p class="lede">The room is simple. The coffee isn't. We decided early on which one mattered more.</p>
+</section>
+
+<section class="wrap" id="menu">
+  <h2>A few things people come back for</h2>
+  <ul class="menu">
+    <li>
+      <h3>Si Hitam Cold Brew</h3>
+      <p>Si Hitam was brewed last night. It's been waiting quietly. That's kind of the whole point of it.</p>
+    </li>
+    <li>
+      <h3>Balinese Tangerine</h3>
+      <p>We've watched enough people take their first sip of the Balinese Tangerine to know what the face looks like. It's a good face.</p>
+    </li>
+    <li>
+      <h3>Kopi Susu Mataleso Nusantara</h3>
+      <p>We named it Nusantara for a reason. It's not just a kopi susu. You'll understand that after the first sip more than we could explain it now.</p>
+    </li>
+    <li>
+      <h3>Pistachio Matcha</h3>
+      <p>It started as something we were curious about. It's now the drink people describe to their friends before they even arrive.</p>
+    </li>
+    <li>
+      <h3>Temple of Rose</h3>
+      <p>We've seen people order Temple of Rose and then sit very still for a while. We think that's the right response.</p>
+    </li>
+    <li>
+      <h3>Mango Kopyor</h3>
+      <p>Makes complete sense if you grew up with it. Requires a small leap of faith if you didn't. Either way, people finish it.</p>
+    </li>
+    <li>
+      <h3>Klepon</h3>
+      <p>Some people come in for the coffee and leave having also eaten two klepon. We don't question it.</p>
+    </li>
+  </ul>
+</section>
+
+<section class="wrap">
+  <h2>Why Mataleso</h2>
+  <p>Mataleso is the Manggarai word for sun. We open with it and stay open long after it's gone. In between, there's coffee, Indonesian pastry, and music we take more seriously than most people would think is reasonable.</p>
+</section>
+
+<section class="wrap" id="visit">
+  <h2>Visit</h2>
+  <dl class="visit">
+    <dt>Address</dt>
+    <dd>Jalan Padang Linjong, Canggu, Bali</dd>
+    <dt>Hours</dt>
+    <dd>Every day, 7am to 9pm</dd>
+  </dl>
+  <div class="map">
+    <iframe title="Map to Mataleso Coffee" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps?q=Mataleso+Coffee+Canggu&output=embed"></iframe>
+  </div>
+</section>
+
+<footer class="wrap">
+  Mataleso Coffee · Jalan Padang Linjong, Canggu · Open every day, 7am to 9pm
+</footer>
+
+<nav class="bar" aria-label="Quick actions">
+  <a class="btn primary" data-track="click_directions" href="https://www.google.com/maps/dir/?api=1&destination=Mataleso+Coffee+Canggu" target="_blank" rel="noopener">Directions</a>
+  <a class="btn" data-track="click_whatsapp" data-wa href="https://wa.me/62XXXXXXXXXXX" target="_blank" rel="noopener">WhatsApp</a>
+</nav>
+
+<script>
+  // Map of event name to Google Ads conversion "send_to". Fill in labels from ConversionActionService.
+  var ADS_CONVERSIONS = {
+    click_directions: 'AW-XXXXXXXXXX/DIRECTIONS_LABEL',
+    click_whatsapp: 'AW-XXXXXXXXXX/WHATSAPP_LABEL'
+  };
+
+  // Keep the gclid for 90 days so a later WhatsApp chat can be matched to the ad click
+  // (offline conversion upload via ConversionUploadService).
+  function store(key, value) { try { localStorage.setItem(key, value); } catch (e) {} }
+  function read(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
+
+  var params = new URLSearchParams(location.search);
+  var gclid = params.get('gclid');
+  if (gclid) store('mataleso_gclid', JSON.stringify({ id: gclid, t: Date.now() }));
+  var saved = null;
+  try { saved = JSON.parse(read('mataleso_gclid')); } catch (e) {}
+  if (saved && Date.now() - saved.t > 90 * 864e5) saved = null;
+
+  // Short reference code in the prefilled WhatsApp message; the staff/CRM maps it back to the gclid.
+  var ref = saved ? 'M' + saved.id.slice(-6).toUpperCase() : null;
+  document.querySelectorAll('[data-wa]').forEach(function (a) {
+    var text = 'Hi Mataleso, I have a question.' + (ref ? ' (ref ' + ref + ')' : '');
+    a.href = a.href.split('?')[0] + '?text=' + encodeURIComponent(text);
+  });
+
+  document.querySelectorAll('[data-track]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var name = a.getAttribute('data-track');
+      gtag('event', name, { link_url: a.href, ref_code: ref || undefined });
+      if (ADS_CONVERSIONS[name]) gtag('event', 'conversion', { send_to: ADS_CONVERSIONS[name] });
+    });
+  });
+
+  // Open/closed line, in Bali time (WITA, UTC+8).
+  (function () {
+    var now = new Date();
+    var wita = new Date(now.getTime() + (now.getTimezoneOffset() + 480) * 60000);
+    var h = wita.getHours() + wita.getMinutes() / 60;
+    var el = document.querySelector('#status strong');
+    if (h >= 7 && h < 21) el.textContent = 'Open now, until 9pm.';
+    else el.textContent = 'Closed now. We open at 7am.';
+  })();
+</script>
+</body>
+</html>
