@@ -1,0 +1,195 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:PJS;src:url(pjs.woff2) format("woff2");font-weight:200 800}
+:root{--navy:#17184B;--navy2:#2C3391;--yellow:#D8E63C;--breeze:#D3DDE7;--violet:#D6B4FC;--ink:#0F1728;--body:#334155;--muted:#667085;--line:#E6E8EC;--surface:#F7F8FA}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--navy);font-family:PJS,sans-serif}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden}
+.scene{position:absolute;inset:0;opacity:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 90px;text-align:center}
+.dark{background:var(--navy);color:#fff}
+.light{background:#fff;color:var(--navy)}
+.glow{position:absolute;width:1400px;height:1400px;border-radius:50%;background:radial-gradient(circle,rgba(214,180,252,.30),rgba(214,180,252,0) 62%);pointer-events:none}
+.eyebrow{font-weight:700;font-size:30px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:18px;margin-bottom:36px}
+.eyebrow:before{content:"";width:44px;height:6px;border-radius:3px;background:var(--yellow)}
+.light .eyebrow{color:var(--navy2)}
+.dark .eyebrow{color:var(--yellow)}
+h1{font-weight:800;font-size:96px;line-height:1.05;letter-spacing:-2.4px}
+h1 .y{color:var(--yellow)}
+.light h1{line-height:1.2}.light h1 .hl{background:var(--yellow);padding:0 14px;border-radius:14px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+p.sub{font-size:40px;line-height:1.5;font-weight:500;margin-top:34px}
+.dark p.sub{color:#C9CEE6}.light p.sub{color:var(--body)}
+.a{will-change:transform,opacity}
+.card{background:#fff;border-radius:36px;padding:38px 44px;display:flex;align-items:center;gap:30px;text-align:left;box-shadow:0 30px 60px rgba(15,23,40,.12)}
+.dark .card{background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.12);box-shadow:none}
+.card .ic{width:110px;height:110px;flex:none;border-radius:28px;display:flex;align-items:center;justify-content:center}
+.card .t{font-weight:700;font-size:44px;letter-spacing:-.6px}
+.card .d{font-size:30px;margin-top:6px;font-weight:500}
+.dark .card .d{color:#AEB4D6}.light .card .d{color:var(--muted)}
+.stack{display:flex;flex-direction:column;gap:30px;width:100%;margin-top:70px}
+.logo{display:flex;flex-direction:column;align-items:center}
+.word{font-weight:800;font-size:200px;letter-spacing:-8px;line-height:1;display:flex;align-items:flex-end}
+.desc{font-weight:700;font-size:30px;letter-spacing:.32em;margin-top:26px}
+.pill{display:inline-flex;align-items:center;gap:16px;padding:22px 36px;border-radius:999px;font-weight:700;font-size:36px}
+#cap{position:absolute;left:70px;right:70px;bottom:150px;text-align:center;z-index:10}
+#cap span{display:inline;font-weight:600;font-size:38px;line-height:1.55;color:#fff;background:rgba(15,23,40,.78);padding:8px 20px;border-radius:14px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+#bar{position:absolute;left:0;top:0;height:10px;background:var(--yellow);z-index:11}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;width:100%;margin-top:70px}
+.seg{background:var(--surface);border:2px solid var(--line);border-radius:32px;padding:40px 20px;display:flex;flex-direction:column;align-items:center;gap:20px;font-weight:700;font-size:40px;color:var(--navy)}
+.seg.wide{grid-column:span 2}
+.phone{width:600px;height:880px;border-radius:70px;background:var(--navy);padding:26px;position:relative;margin-top:60px;box-shadow:0 40px 80px rgba(23,24,75,.25)}
+.screen{width:100%;height:100%;border-radius:50px;background:#fff;padding:56px 44px;text-align:left;overflow:hidden;position:relative}
+.row{display:flex;align-items:center;gap:22px;padding:22px 0;border-bottom:2px solid var(--line)}
+.row .chk{width:54px;height:54px;border-radius:16px;background:var(--yellow);display:flex;align-items:center;justify-content:center;flex:none}
+.row .ln{height:18px;border-radius:9px;background:var(--breeze)}
+.stamp{position:absolute;right:-70px;bottom:120px;background:var(--yellow);color:var(--navy);font-weight:800;font-size:46px;padding:26px 40px;border-radius:26px;transform:rotate(-8deg);box-shadow:0 20px 40px rgba(15,23,40,.25);letter-spacing:-.5px}
+</style></head>
+<body><div id="stage">
+<div id="bar"></div>
+
+<!-- S1 -->
+<div class="scene dark" id="s1">
+  <div class="glow" style="top:-300px;left:-500px" data-drift="1"></div>
+  <div class="eyebrow a" data-in="0.1">Untuk bisnis Anda</div>
+  <h1 class="a" data-in="0.3">Satu temuan hama,<br>dampaknya <span class="y">besar.</span></h1>
+  <div class="stack">
+    <div class="card a" data-in="1.3"><div class="ic" style="background:rgba(216,230,60,.14)"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#D8E63C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 2h3v16H5V5h3z"/><path d="M9 12l2 2 4-4"/></svg></div><div><div class="t">Audit kebersihan</div><div class="d">HACCP, ISO, inspeksi rutin</div></div></div>
+    <div class="card a" data-in="2.6"><div class="ic" style="background:rgba(216,230,60,.14)"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#D8E63C" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></div><div><div class="t">Ulasan tamu</div><div class="d">Rating OTA dan Google</div></div></div>
+    <div class="card a" data-in="3.9"><div class="ic" style="background:rgba(216,230,60,.14)"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#D8E63C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/></svg></div><div><div class="t">Reputasi bisnis</div><div class="d">Yang dibangun bertahun-tahun</div></div></div>
+  </div>
+</div>
+
+<!-- S2 -->
+<div class="scene dark" id="s2">
+  <div class="glow" style="top:200px;left:-160px" data-drift="1"></div>
+  <div class="logo">
+    <div class="a" data-in="0.1" data-kind="pop">
+      <svg width="190" height="220" viewBox="0 0 190 220"><path id="shield" d="M95 10 L175 40 V105 C175 155 140 195 95 210 C50 195 15 155 15 105 V40 Z" fill="none" stroke="#D8E63C" stroke-width="12" stroke-linejoin="round"/><path id="tick" d="M58 110 L85 137 L135 85" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="word a" data-in="0.9" style="margin-top:30px"><span style="color:#fff">pest</span><span style="color:var(--yellow)">ra</span></div>
+    <div class="desc a" data-in="1.4" style="color:#C9CEE6">TRUSTED PEST PROTECTION</div>
+  </div>
+  <p class="sub a" data-in="2.2" style="margin-top:90px">Mitra perlindungan hama<br>untuk bisnis Anda</p>
+  <div class="a" data-in="3.4" style="display:flex;gap:24px;margin-top:60px">
+    <span class="pill" style="background:var(--yellow);color:var(--navy)"><svg width="34" height="34" viewBox="0 0 24 24" fill="#17184B"><path d="M12 2a7 7 0 00-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z"/></svg>Jabodetabek</span>
+    <span class="pill" style="background:var(--yellow);color:var(--navy)"><svg width="34" height="34" viewBox="0 0 24 24" fill="#17184B"><path d="M12 2a7 7 0 00-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z"/></svg>Bali</span>
+  </div>
+</div>
+
+<!-- S3 -->
+<div class="scene light" id="s3">
+  <div class="eyebrow a" data-in="0.1">Cara kami bekerja</div>
+  <h1 class="a" data-in="0.3">Terjadwal, rapi,<br><span class="hl">tersertifikasi.</span></h1>
+  <div class="stack">
+    <div class="card a" data-in="0.9" style="border:2px solid var(--line)"><div class="ic" style="background:var(--navy)"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#D8E63C" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8.5 15l2.5 2.5 4.5-4.5"/></svg></div><div><div class="t">Layanan terjadwal</div><div class="d">Kunjungan rutin sesuai kontrak</div></div></div>
+    <div class="card a" data-in="2.4" style="border:2px solid var(--line)"><div class="ic" style="background:var(--navy)"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#D8E63C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14l-1.5 8 5-3 5 3-1.5-8"/></svg></div><div><div class="t">Teknisi tersertifikasi</div><div class="d">Terlatih dan berstandar ASPPHAMI</div></div></div>
+    <div class="card a" data-in="4.2" style="border:2px solid var(--line)"><div class="ic" style="background:var(--navy)"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#D8E63C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L5 18a2 2 0 002 3h10a2 2 0 002-3l-5-9V3"/><path d="M7.5 14h9"/></svg></div><div><div class="t">Bahan terdaftar</div><div class="d">Terdaftar di Kemenkes</div></div></div>
+  </div>
+</div>
+
+<!-- S4 -->
+<div class="scene light" id="s4" style="background:var(--surface)">
+  <div class="eyebrow a" data-in="0.1">Dokumentasi digital</div>
+  <h1 class="a" data-in="0.3">Selalu <span class="hl">siap audit.</span></h1>
+  <div class="phone a" data-in="0.8">
+    <div class="screen">
+      <div style="font-weight:800;font-size:40px;color:var(--navy);letter-spacing:-.6px">Laporan kunjungan</div>
+      <div style="font-size:26px;color:var(--muted);margin-top:8px;font-weight:500">Pestra · Service report</div>
+      <div style="margin-top:30px">
+        <div class="row a" data-in="1.6"><div class="chk"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#17184B" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></div><div style="flex:1"><div class="ln" style="width:80%"></div><div class="ln" style="width:50%;margin-top:12px;background:var(--line)"></div></div></div>
+        <div class="row a" data-in="2.2"><div class="chk"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#17184B" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></div><div style="flex:1"><div class="ln" style="width:70%"></div><div class="ln" style="width:60%;margin-top:12px;background:var(--line)"></div></div></div>
+        <div class="row a" data-in="2.8"><div class="chk"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#17184B" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></div><div style="flex:1"><div class="ln" style="width:85%"></div><div class="ln" style="width:40%;margin-top:12px;background:var(--line)"></div></div></div>
+        <div class="row a" data-in="3.4"><div class="chk"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#17184B" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></div><div style="flex:1"><div class="ln" style="width:65%"></div><div class="ln" style="width:55%;margin-top:12px;background:var(--line)"></div></div></div>
+      </div>
+      <div class="a" data-in="3.9" style="margin-top:34px;display:flex;gap:16px">
+        <div style="flex:1;height:150px;border-radius:22px;background:var(--breeze)"></div>
+        <div style="flex:1;height:150px;border-radius:22px;background:rgba(214,180,252,.45)"></div>
+      </div>
+    </div>
+    <div class="stamp a" data-in="4.4" data-kind="stamp">✓ Audit-ready</div>
+  </div>
+</div>
+
+<!-- S5 -->
+<div class="scene dark" id="s5">
+  <div class="glow" style="bottom:-500px;right:-500px" data-drift="1"></div>
+  <div class="eyebrow a" data-in="0.1">Komitmen kami</div>
+  <h1 class="a" data-in="0.3">Jelas dari <span class="y">awal.</span></h1>
+  <div class="stack">
+    <div class="card a" data-in="0.8"><div class="ic" style="background:var(--yellow)"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#17184B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h10l6 6-10 10-6-6z"/><circle cx="9" cy="9" r="1.6" fill="#17184B"/></svg></div><div><div class="t">Harga transparan</div><div class="d">Tanpa biaya tersembunyi</div></div></div>
+    <div class="card a" data-in="2.2"><div class="ic" style="background:var(--yellow)"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#17184B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h5"/></svg></div><div><div class="t">Garansi tertulis</div><div class="d">Tercantum dalam kontrak</div></div></div>
+    <div class="card a" data-in="3.6"><div class="ic" style="background:var(--yellow)"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#17184B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><div class="t">Respons darurat 24 jam</div><div class="d">Saat bisnis Anda butuh cepat</div></div></div>
+  </div>
+</div>
+
+<!-- S6 -->
+<div class="scene light" id="s6">
+  <div class="eyebrow a" data-in="0.05">Siapa yang kami lindungi</div>
+  <h1 class="a" data-in="0.2">Untuk setiap<br><span class="hl">ruang usaha.</span></h1>
+  <div class="grid">
+    <div class="seg a" data-in="0.5"><svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#2C3391" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8M5 3v4a2 2 0 004 0V3M7 11v10M17 3c-2 0-3 3-3 6s1 4 3 4v8"/></svg>Restoran</div>
+    <div class="seg a" data-in="1.1"><svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#2C3391" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9h18v12M3 9l9-6 9 6M8 21v-5h8v5M7 12h2M15 12h2"/></svg>Hotel</div>
+    <div class="seg a" data-in="1.6"><svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#2C3391" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l9-5 9 5v13M7 21v-9h10v9M7 15h10M7 18h10"/></svg>Gudang</div>
+    <div class="seg a" data-in="2.1"><svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#2C3391" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2M11 21v-3h2v3"/></svg>Kantor</div>
+    <div class="seg wide a" data-in="2.6" style="flex-direction:row;justify-content:center;background:var(--navy);color:#fff;border-color:var(--navy)"><svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#D8E63C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12l10-8 10 8M5 10v10h14V10M10 20v-5h4v5"/></svg>Villa dan akomodasi di Bali</div>
+  </div>
+</div>
+
+<!-- S7 -->
+<div class="scene dark" id="s7">
+  <div class="glow" style="top:300px;left:-160px" data-drift="1"></div>
+  <div class="logo a" data-in="0.1" data-kind="pop">
+    <div class="word" style="font-size:170px"><span style="color:#fff">pest</span><span style="color:var(--yellow)">ra</span></div>
+    <div class="desc" style="color:#C9CEE6;font-size:26px">TRUSTED PEST PROTECTION</div>
+  </div>
+  <h1 class="a" data-in="0.6" style="margin-top:110px;font-size:88px">Bisnis bebas hama,<br>reputasi <span class="y">terjaga.</span></h1>
+  <p class="sub a" data-in="3.0" style="font-size:48px;color:#fff;font-weight:700">Tenang, Ada Pestra.</p>
+  <div class="a" data-in="4.0" style="margin-top:80px;display:flex;flex-direction:column;gap:22px;align-items:center">
+    <span class="pill" style="background:var(--yellow);color:var(--navy);font-size:42px;padding:26px 48px">pestraindonesia.com</span>
+    <span style="font-size:34px;color:#C9CEE6;font-weight:500">info@pestraindonesia.com</span>
+  </div>
+</div>
+
+<div id="cap"><span></span></div>
+</div>
+<script src="timeline.js"></script>
+<script>
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const ease=x=>1-Math.pow(1-clamp(x),3);
+const back=x=>{x=clamp(x);const c=1.70158;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const scenes=TL.scenes, TOTAL=TL.total;
+const els=scenes.map(s=>document.getElementById(s.id));
+function sceneWindow(i){const s=scenes[i];const a=i===0?0:s.start-0.35;const b=i===scenes.length-1?TOTAL+1:scenes[i+1].start-0.35;return [a,b]}
+window.render=function(t){
+  document.getElementById('bar').style.width=(clamp(t/TOTAL)*1080)+'px';
+  let cap='';
+  scenes.forEach((s,i)=>{
+    const el=els[i];const [a,b]=sceneWindow(i);
+    if(t<a-0.01||t>b+0.45){el.style.opacity=0;el.style.visibility='hidden';return}
+    el.style.visibility='visible';
+    const fin=i===0?1:ease((t-a)/0.45), fout=1-ease((t-b)/0.45);
+    el.style.opacity=Math.min(fin,fout);
+    el.style.zIndex= t<b ? 2 : 1;
+    const lt=t-s.start;
+    el.querySelectorAll('.a').forEach(n=>{
+      const d=parseFloat(n.dataset.in||0), k=n.dataset.kind, p=(lt-d)/0.7;
+      if(k==='pop'){const q=back(p);n.style.opacity=clamp(p*2);n.style.transform=`scale(${0.6+0.4*q})`}
+      else if(k==='stamp'){const q=back((lt-d)/0.5);n.style.opacity=clamp((lt-d)*4);n.style.transform=`rotate(-8deg) scale(${1.8-0.8*q})`}
+      else{const q=ease(p);n.style.opacity=q;n.style.transform=`translateY(${(1-q)*60}px)`}
+    });
+    el.querySelectorAll('[data-drift]').forEach(g=>{g.style.transform=`translate(${Math.sin(t*0.35)*80}px,${Math.cos(t*0.3)*60}px)`});
+    if(s.id==='s2'){
+      const sh=document.getElementById('shield'),tk=document.getElementById('tick');
+      const L1=sh.getTotalLength(),L2=tk.getTotalLength();
+      sh.style.strokeDasharray=L1;sh.style.strokeDashoffset=L1*(1-ease((lt-0.1)/1.0));
+      tk.style.strokeDasharray=L2;tk.style.strokeDashoffset=L2*(1-ease((lt-0.9)/0.5));
+    }
+    if(t>=s.start-0.1&&t<=s.start+s.dur+0.4) cap=s.text;
+  });
+  const c=document.querySelector('#cap span');
+  if(c.textContent!==cap)c.textContent=cap;
+  document.getElementById('cap').style.opacity=cap?1:0;
+};
+render(0);
+</script>
+</body></html>
