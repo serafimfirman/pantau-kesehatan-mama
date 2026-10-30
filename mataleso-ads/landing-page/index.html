@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mataleso Coffee Canggu</title>
-<meta name="description" content="Specialty coffee with Indonesian soul on Jalan Padang Linjong, Canggu. Open every day, 7am to 9pm.">
+<meta name="description" content="Specialty coffee and home-style Indonesian food on Jalan Padang Linjong, Canggu. Se'i from our family farm in Flores. Open from 7am.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
@@ -75,7 +75,8 @@
   }
   h1 { font-size: clamp(36px, 8vw, 54px); }
   .tagline { color: var(--muted); margin: 12px 0 0; font-size: 18px; }
-  .status { margin: 28px 0 0; font-size: 15px; color: var(--muted); }
+  .rating { margin: 20px 0 0; font-size: 15px; color: var(--muted); }
+  .status { margin: 8px 0 0; font-size: 15px; color: var(--muted); }
   .status strong { color: var(--ink); font-weight: 500; }
 
   .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
@@ -125,10 +126,12 @@
   <div class="sun" aria-hidden="true"></div>
   <h1>Mataleso Coffee</h1>
   <p class="tagline">Specialty Coffee, Indonesian Soul.</p>
+  <p class="rating">4.8 on Google · 32 reviews</p>
   <p class="status" id="status">Jalan Padang Linjong, Canggu. <strong>Open every day, 7am to 9pm.</strong></p>
   <div class="actions">
-    <a class="btn primary" data-track="click_directions" href="https://www.google.com/maps/dir/?api=1&destination=Mataleso+Coffee+Canggu" target="_blank" rel="noopener">Get directions</a>
+    <a class="btn primary" data-track="click_directions" href="https://www.google.com/maps/dir/?api=1&destination=Mataleso+Bali&destination_place_id=ChIJrb4mO7U50i0RmzQ6DmNuyTA" target="_blank" rel="noopener">Get directions</a>
     <a class="btn" data-track="click_whatsapp" data-wa href="https://wa.me/62XXXXXXXXXXX" target="_blank" rel="noopener">WhatsApp</a>
+    <a class="btn" data-track="click_call" href="tel:+6282364136150">Call</a>
     <a class="btn" data-track="view_menu" href="#menu">See the menu</a>
   </div>
 </header>
@@ -138,7 +141,7 @@
 </section>
 
 <section class="wrap" id="menu">
-  <h2>A few things people come back for</h2>
+  <h2>Coffee people come back for</h2>
   <ul class="menu">
     <li>
       <h3>Si Hitam Cold Brew</h3>
@@ -171,6 +174,29 @@
   </ul>
 </section>
 
+<section class="wrap" id="food">
+  <h2>Food, the way it's made at home</h2>
+  <p>Traditional Indonesian dishes from across the islands, cooked fresh when you order.</p>
+  <ul class="menu">
+    <li>
+      <h3>Se'i</h3>
+      <p>Smoked meat from our family farm in Flores. It's the thing we're proudest of, so we'll keep this short.</p>
+    </li>
+    <li>
+      <h3>Nasi goreng se'i</h3>
+      <p>The same se'i, in a plate of nasi goreng.</p>
+    </li>
+    <li>
+      <h3>Beef rendang, soto betawi, siomay, sup brenebon</h3>
+      <p>From Padang, Jakarta, Bandung and Manado. One kitchen, a lot of islands.</p>
+    </li>
+    <li>
+      <h3>Klepon and dadar gulung</h3>
+      <p>Made with no artificial colouring.</p>
+    </li>
+  </ul>
+</section>
+
 <section class="wrap">
   <h2>Why Mataleso</h2>
   <p>Mataleso is the Manggarai word for sun. We open with it and stay open long after it's gone. In between, there's coffee, Indonesian pastry, and music we take more seriously than most people would think is reasonable.</p>
@@ -183,19 +209,22 @@
     <dd>Jalan Padang Linjong, Canggu, Bali</dd>
     <dt>Hours</dt>
     <dd>Every day, 7am to 9pm</dd>
+    <dt>Phone</dt>
+    <dd><a data-track="click_call" href="tel:+6282364136150">0823-6413-6150</a></dd>
   </dl>
   <div class="map">
     <iframe title="Map to Mataleso Coffee" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-      src="https://www.google.com/maps?q=Mataleso+Coffee+Canggu&output=embed"></iframe>
+      src="https://www.google.com/maps?q=-8.6397,115.1408&z=17&output=embed"></iframe>
   </div>
 </section>
 
 <footer class="wrap">
-  Mataleso Coffee · Jalan Padang Linjong, Canggu · Open every day, 7am to 9pm
+  Mataleso Bali · Jalan Padang Linjong, Canggu · 0823-6413-6150
 </footer>
 
 <nav class="bar" aria-label="Quick actions">
-  <a class="btn primary" data-track="click_directions" href="https://www.google.com/maps/dir/?api=1&destination=Mataleso+Coffee+Canggu" target="_blank" rel="noopener">Directions</a>
+  <a class="btn primary" data-track="click_directions" href="https://www.google.com/maps/dir/?api=1&destination=Mataleso+Bali&destination_place_id=ChIJrb4mO7U50i0RmzQ6DmNuyTA" target="_blank" rel="noopener">Directions</a>
+  <a class="btn" data-track="click_call" href="tel:+6282364136150">Call</a>
   <a class="btn" data-track="click_whatsapp" data-wa href="https://wa.me/62XXXXXXXXXXX" target="_blank" rel="noopener">WhatsApp</a>
 </nav>
 
@@ -203,7 +232,8 @@
   // Map of event name to Google Ads conversion "send_to". Fill in labels from ConversionActionService.
   var ADS_CONVERSIONS = {
     click_directions: 'AW-XXXXXXXXXX/DIRECTIONS_LABEL',
-    click_whatsapp: 'AW-XXXXXXXXXX/WHATSAPP_LABEL'
+    click_whatsapp: 'AW-XXXXXXXXXX/WHATSAPP_LABEL',
+    click_call: 'AW-XXXXXXXXXX/CALL_LABEL'
   };
 
   // Keep the gclid for 90 days so a later WhatsApp chat can be matched to the ad click
