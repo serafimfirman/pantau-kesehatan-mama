@@ -16,8 +16,8 @@ File di folder ini membuat 1 campaign Search (status **Paused**) untuk Mataleso 
 
 1. Ganti `https://YOUR-DOMAIN/` di `5-responsive-search-ads.csv` dengan URL landing page yang sudah online.
    Iklan Search wajib punya URL di domain sendiri; link Google Maps tidak bisa dipakai.
-2. Cek jam tutup. Copy iklan sengaja hanya menyebut "Open from 7am" sampai jam tutup (20.00 atau 21.00)
-   dan jam hari Selasa di GBP dikonfirmasi.
+2. Kedai tutup hari Selasa, jadi copy iklan sengaja tidak menyebut "every day" dan hanya menulis "Open from 7am".
+   Jam tutup (20.00 atau 21.00) masih perlu dikonfirmasi sebelum ditambahkan ke iklan.
 
 ## Cara impor
 
@@ -38,4 +38,4 @@ File di folder ini membuat 1 campaign Search (status **Paused**) untuk Mataleso 
 - **Conversion:** buat conversion action untuk klik directions dan WhatsApp di landing page,
   lalu ganti bidding ke Maximize conversions setelah ada 15+ conversion per bulan.
 
-Budget awal Rp150.000/hari, Maximize clicks dengan batas CPC Rp6.000 (sesuaikan setelah data Keyword Planner masuk).
+Jadwal iklan Rabu sampai Senin 06.30–20.30 (Selasa kedai tutup, iklan mati). Budget awal Rp150.000/hari, Maximize clicks dengan batas CPC Rp6.000 (sesuaikan setelah data Keyword Planner masuk).

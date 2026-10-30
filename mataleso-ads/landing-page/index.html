@@ -127,7 +127,7 @@
   <h1>Mataleso Coffee</h1>
   <p class="tagline">Specialty Coffee, Indonesian Soul.</p>
   <p class="rating">4.8 on Google · 32 reviews</p>
-  <p class="status" id="status">Jalan Padang Linjong, Canggu. <strong>Open every day, 7am to 9pm.</strong></p>
+  <p class="status" id="status">Jalan Padang Linjong, Canggu. <strong>Open from 7am. Closed on Tuesdays.</strong></p>
   <div class="actions">
     <a class="btn primary" data-track="click_directions" href="https://www.google.com/maps/dir/?api=1&destination=Mataleso+Bali&destination_place_id=ChIJrb4mO7U50i0RmzQ6DmNuyTA" target="_blank" rel="noopener">Get directions</a>
     <a class="btn" data-track="click_whatsapp" data-wa href="https://wa.me/62XXXXXXXXXXX" target="_blank" rel="noopener">WhatsApp</a>
@@ -208,7 +208,7 @@
     <dt>Address</dt>
     <dd>Jalan Padang Linjong, Canggu, Bali</dd>
     <dt>Hours</dt>
-    <dd>Every day, 7am to 9pm</dd>
+    <dd>Wednesday to Monday, 7am to 9pm<br>Closed on Tuesdays</dd>
     <dt>Phone</dt>
     <dd><a data-track="click_call" href="tel:+6282364136150">0823-6413-6150</a></dd>
   </dl>
@@ -269,7 +269,10 @@
     var wita = new Date(now.getTime() + (now.getTimezoneOffset() + 480) * 60000);
     var h = wita.getHours() + wita.getMinutes() / 60;
     var el = document.querySelector('#status strong');
-    if (h >= 7 && h < 21) el.textContent = 'Open now, until 9pm.';
+    var tuesday = wita.getDay() === 2;
+    if (tuesday) el.textContent = 'Closed today. See you tomorrow from 7am.';
+    else if (h >= 7 && h < 21) el.textContent = 'Open now, until 9pm.';
+    else if (h >= 21 && wita.getDay() === 1) el.textContent = 'Closed now. We open again on Wednesday at 7am.';
     else el.textContent = 'Closed now. We open at 7am.';
   })();
 </script>

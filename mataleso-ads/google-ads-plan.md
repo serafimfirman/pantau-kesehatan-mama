@@ -2,7 +2,7 @@
 
 **Bisnis:** Mataleso Coffee, specialty coffee shop
 **Lokasi:** Jalan Padang Linjong, Canggu, Bali
-**Jam buka:** setiap hari, 07.00 sampai 21.00 WITA
+**Jam buka:** Rabu sampai Senin, 07.00 sampai 21.00 WITA. **Selasa tutup.**
 **Tagline:** Specialty Coffee, Indonesian Soul.
 **Status website:** belum ada, jadi pakai landing page di `landing-page/index.html`
 
@@ -46,7 +46,7 @@ Akun: Mataleso Coffee Canggu (di bawah MCC)
 | Network | Google Search saja (matikan Search Partners dan Display) |
 | Lokasi | Radius 5 km dari alamat GBP (Padang Linjong). Opsi "Presence: People in or regularly in", bukan "interest" |
 | Bahasa | Tidak diset manual (sejak 30 Sep 2026 Google mencocokkan dari bahasa iklan). Copy dalam bahasa Inggris |
-| Jadwal iklan | 06.30 sampai 20.30 WITA (berhenti 30 menit sebelum tutup) |
+| Jadwal iklan | Rabu sampai Senin, 06.30 sampai 20.30 WITA. Selasa iklan mati (kedai tutup) |
 | Bidding minggu 1 sampai 3 | Maximize clicks, max CPC cap (lihat bagian budget) |
 | Bidding setelah 15+ conversion/bulan | Maximize conversions, lalu Target CPA |
 | Conversion goal | `click_directions` dan `click_whatsapp` (primary). `view_menu` (secondary) |
@@ -121,7 +121,7 @@ Semua sudah dicek panjangnya (headline ≤ 30, deskripsi ≤ 90 karakter) dan me
 |---|---|---|---|
 | 1 | Mataleso Coffee Canggu | 22 | Semua (pin posisi 1 di AG5) |
 | 2 | Specialty coffee in Canggu | 26 | AG1, AG2 |
-| 3 | Open every day, 7am to 9pm | 26 | Semua |
+| 3 | Open from 7am | 13 | Semua |
 | 4 | On Jalan Padang Linjong | 23 | Semua |
 | 5 | Coffee shop near you | 20 | AG1 |
 | 6 | Kopi Susu Mataleso Nusantara | 28 | AG4 |
@@ -150,7 +150,7 @@ Setiap ad group: ambil 12 sampai 15 headline (yang spesifik ad group + yang "Sem
 | # | Deskripsi | Char |
 |---|---|---|
 | 1 | The room is simple. The coffee isn't. Specialty coffee with Indonesian soul in Canggu. | 86 |
-| 2 | Open every day, 7am to 9pm on Jalan Padang Linjong. Come in, sit down, stay a while. | 84 |
+| 2 | Coffee from Indonesian beans on Jalan Padang Linjong. Come in, sit down, stay a while. | 86 |
 | 3 | Si Hitam cold brew, Balinese Tangerine, klepon. Drinks that taste like they belong here. | 88 |
 | 4 | Mataleso is the Manggarai word for sun. We open early and close late. Come find us. | 83 |
 | 5 | Pistachio matcha, Temple of Rose, Midnight in Paris. Not everything here is coffee. | 83 |
@@ -171,7 +171,7 @@ AG3 pakai #5 sebagai deskripsi utama. AG2 pakai #6. AG5 pakai #4.
 | Location | Tautkan GBP Canggu (AssetSet `LOCATION_SYNC`). **Paling penting**, karena memunculkan alamat, jarak, dan tombol arah |
 | Call | Nomor kedai (perlu diisi). Aktifkan call reporting (Google forwarding number tersedia di Indonesia) |
 | Sitelinks | "See the menu" → `#menu` · "Get directions" → `#visit` · "Opening hours" → `#visit` · "Chat on WhatsApp" → landing page |
-| Callouts | Open 7am to 9pm daily · Jalan Padang Linjong · Indonesian pastry · Cold brew made daily · Matcha and tea |
+| Callouts | Open from 7am · Jalan Padang Linjong · Indonesian pastry · Cold brew made daily · Matcha and tea |
 | Structured snippet | Header "Types": Signature coffee, Espresso, Tea, Matcha, Juice, Indonesian pastry |
 | Image | 3 sampai 5 foto asli (produk lebih penting dari ruangan, sesuai brand) |
 | Message (opsional) | WhatsApp, kalau tersedia untuk akun |
